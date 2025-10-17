@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Page Capture - Options</title>
+    <style>
+        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 18px; max-width: 720px; }
+        label { display: block; margin-top: 12px; font-weight: 600; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 8px; margin-top: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
+        .radio-row { margin-top: 8px; }
+        button { margin-top: 16px; padding: 10px 14px; border-radius: 8px; border: 1px solid #888; background: #f4f4f4; cursor: pointer; }
+        #saveStatus { margin-left: 12px; font-size: 13px; color: #2a7; }
+        .hint { font-size: 13px; color: #666; margin-top: 8px; }
+    </style>
+</head>
+<body>
+<h1>Page Capture - Options</h1>
+<form id="optionsForm">
+    <label for="apiEndpoint">API Endpoint URL</label>
+    <input id="apiEndpoint" type="text" placeholder="https://api.example.com/upload" />
+
+    <label for="authToken">Authentication Token (Bearer)</label>
+    <input id="authToken" type="password" placeholder="Optional: paste token here" />
+
+    <label>Upload Mode</label>
+    <div class="radio-row">
+        <label><input type="radio" name="uploadMode" value="multipart" /> multipart/form-data</label><br />
+        <label><input type="radio" name="uploadMode" value="base64" /> JSON with base64 data</label>
+    </div>
+
+    <button id="saveBtn" type="button">Save</button>
+    <span id="saveStatus"></span>
+</form>
+
+<div class="hint">Settings are saved in Firefox Sync storage (and will sync across browsers if you’re signed in with Sync enabled).</div>
+
+<script src="options.js"></script>
+</body>
+</html>

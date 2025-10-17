@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture Preview</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Roboto, sans-serif;
+            background: #f2f2f2;
+            color: #222;
+        }
+
+        div {
+            background: #e3e3e3;
+            border-bottom: 1px solid #b8b8b8;
+            padding: 6px 8px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        button {
+            font-size: 14px;
+            padding: 4px 12px;
+            border: 1px solid #999;
+            border-radius: 3px;
+            background: linear-gradient(to bottom, #f7f7f7, #dcdcdc);
+            color: #222;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #ffffff, #d0d0d0);
+            border-color: #777;
+        }
+
+        button:active {
+            background: #c8c8c8;
+            border-color: #555;
+        }
+
+        iframe {
+            flex: 1;
+            border: none;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button id="sendBtn">Send</button>
+</div>
+<iframe id="preview"></iframe>
+<script src="preview.js"></script>
+</body>
+</html>
