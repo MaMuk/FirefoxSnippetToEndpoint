@@ -12,16 +12,69 @@
         button { margin-top: 16px; padding: 10px 14px; border-radius: 8px; border: 1px solid #888; background: #f4f4f4; cursor: pointer; }
         #saveStatus { margin-left: 12px; font-size: 13px; color: #2a7; }
         .hint { font-size: 13px; color: #666; margin-top: 8px; }
+
+        .endpoint-item {
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+            background: #fafafa;
+            position: relative;
+        }
+        .endpoint-item h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .endpoint-item .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .endpoint-item .remove-btn:hover {
+            background: #c82333;
+        }
+        #addEndpointBtn {
+            background: #28a745;
+            color: white;
+            border: 1px solid #1e7e34;
+            margin-top: 12px;
+        }
+        #addEndpointBtn:hover {
+            background: #218838;
+        }
+        .section-header {
+            margin-top: 24px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ddd;
+        }
     </style>
 </head>
 <body>
 <h1>Page Capture - Options</h1>
 <form id="optionsForm">
-    <label for="apiEndpoint">API Endpoint URL</label>
-    <input id="apiEndpoint" type="text" placeholder="https://api.example.com/upload" />
+    <div class="section-header">
+        <h2>Endpoints</h2>
+    </div>
 
-    <label for="authToken">Authentication Token (Bearer)</label>
+    <div id="endpointsContainer"></div>
+
+    <button id="addEndpointBtn" type="button">+ Add Endpoint</button>
+
+    <div class="section-header">
+        <h2>General Settings</h2>
+    </div>
+
+    <label for="authToken">Default Authentication Token (Bearer)</label>
     <input id="authToken" type="password" placeholder="Optional: paste token here" />
+    <div class="hint">Use with caution! This token will be used for any endpoint without its own token.</div>
 
     <label>Upload Mode</label>
     <div class="radio-row">

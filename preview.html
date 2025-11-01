@@ -23,7 +23,7 @@
             align-items: center;
         }
 
-        button {
+        button, select {
             font-size: 14px;
             padding: 4px 12px;
             border: 1px solid #999;
@@ -32,6 +32,12 @@
             color: #222;
             cursor: pointer;
             transition: background 0.15s, border-color 0.15s;
+        }
+        button:disabled, select:disabled  {
+            background: #f1f1f1;
+            border: 1px solid #999999;
+            color: #6d6d6d;
+            cursor:default;
         }
 
         button:hover {
@@ -49,11 +55,52 @@
             border: none;
             background: #fff;
         }
+        .controlsDiv {
+            justify-content: space-between;
+            align-items: center;
+        }
+        #jsonLdContainer {
+            padding: 4px 0px;
+            background-color: #e3e3e30d;
+        }
+        .jsonLdControls {
+            display:flex; align-items:center; gap:6px;
+            justify-content: end;
+            padding: 0;
+            border-bottom: 0;
+            background-color: unset;
+        }
+        #jsonLdSelect {
+            min-width:200px;
+        }
+        #togglePreviewBtn{
+            font-size:16px; cursor:pointer; border:none; background:none; outline:none;
+        }
+        #jsonLdPreview{
+            display:none; margin-top:6px; max-height:250px; overflow:auto;
+            background:#1e1e1e; color:#dcdcdc; padding:6px;
+            border-radius:4px; font-size:13px; font-family:monospace;
+        }
     </style>
 </head>
 <body>
-<div>
+<div class="controlsDiv">
     <button id="sendBtn">Send</button>
+    <select id="endpointSelect">
+    </select>
+    <label>
+        <input type="checkbox" id="jsonLdCheckbox">
+        JSON-LD
+    </label>
+</div>
+<div id="jsonLdContainer" style="display:none;">
+    <div class="jsonLdControls">
+    <select id="jsonLdSelect"></select>
+        <button id="togglePreviewBtn"
+                title="Show/Hide JSON-LD preview">🔍</button>
+    </div>
+    <pre id="jsonLdPreview">
+    </pre>
 </div>
 <iframe id="preview"></iframe>
 <script src="preview.js"></script>

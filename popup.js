@@ -6,9 +6,16 @@ function setStatus(msg, isError = false) {
 }
 
 const endpointDisplay = document.getElementById('endpointDisplay');
-function showEndpointText(url) {
-    endpointDisplay.textContent = url ? `Endpoint: ${url}` : 'Endpoint: (not configured)';
+function showEndpointText(endpoints) {
+    if (!endpoints || endpoints.length === 0) {
+        endpointDisplay.textContent = 'No endpoints configured';
+        endpointDisplay.style.color = '#d32f2f';
+    } else {
+        endpointDisplay.textContent = `${endpoints.length} endpoint${endpoints.length === 1 ? '' : 's'} configured`;
+        endpointDisplay.style.color = '#222';
+    }
 }
+
 loadSettingsAndShow();
 document.getElementById('openOptions').addEventListener('click', (e) => {
     e.preventDefault();
@@ -18,13 +25,13 @@ document.getElementById('openOptions').addEventListener('click', (e) => {
 async function loadSettingsAndShow() {
     try {
         const data = await browser.storage.sync.get({
-            apiEndpoint: '',
+            endpoints: [],
             authToken: '',
             uploadMode: 'multipart'
         });
-        showEndpointText(data.apiEndpoint);
+        showEndpointText(data.endpoints);
     } catch (err) {
-        showEndpointText('');
+        showEndpointText([]);
         console.error('Failed to read settings from storage', err);
     }
 }
@@ -54,8 +61,9 @@ async function captureAndPreview(selectionOnly) {
     const title = tab.title || 'page';
     const url = tab.url || '';
     const sanitizedHtml = result.sanitizedHtml;
+const jsonLdSnippets = result.jsonLdSnippets || [];
 
-    openPreview(sanitizedHtml, title, url);
+openPreview(sanitizedHtml, title, url, jsonLdSnippets);
 }
 
 document.getElementById('captureBtn').addEventListener('click', async () => {
@@ -71,10 +79,12 @@ document.getElementById('captureSelectionBtn').addEventListener('click', async (
 });
 
 
-async function openPreview(sanitizedHtml,title,url) {
+async function openPreview(sanitizedHtml, title, url, jsonLdSnippets) {
+    sessionStorage.clear();
     sessionStorage.setItem('sanitizedHtml', sanitizedHtml);
     sessionStorage.setItem('pageTitle', title);
     sessionStorage.setItem('pageUrl', url);
+    sessionStorage.setItem('jsonLdSnippets', JSON.stringify(jsonLdSnippets));
 
     window.open(browser.runtime.getURL('preview.html'), 'Capture Preview', 'width=800,height=600');
 }
